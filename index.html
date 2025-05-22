@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Glimmer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -36,44 +36,48 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
       margin-bottom: 4rem;
-      justify-content: start; /* align grid left */
+      justify-content: start; /* align left */
     }
     .album-row {
       display: flex;
-      justify-content: start; /* left align the row */
+      justify-content: start; /* left align the bottom row */
       gap: 2rem;
       margin-left: 0.5rem; /* align with grid left padding */
-      max-width: 770px; /* same width as first two albums + gap */
+      max-width: 770px; /* width for 2 albums + gap */
     }
     .album {
       position: relative;
       width: 250px;
+      height: 250px; /* enforce square aspect */
+      border-radius: 4px;
+      overflow: hidden;
     }
     .album img {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 100%;
       object-fit: cover;
-      border-radius: 4px;
+      display: block;
     }
     .info-overlay {
       position: absolute;
+      left: 0;
+      right: 0;
       bottom: 0;
-      width: 100%;
-      height: 2.3rem; /* fixed height to match "Live at the William Street Bird" banner */
+      height: 3.5rem; /* increased height to match original bigger banner */
       background: #fff; /* solid white */
-      color: #000; /* black text */
-      padding: 0.5rem 0.75rem;
-      font-size: 0.9rem;
+      color: #000;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
       opacity: 0;
       transition: opacity 0.3s ease;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       text-align: left;
-      box-sizing: border-box;
       display: flex;
-      align-items: center; /* vertically center text */
-      overflow: hidden;
+      align-items: center;
+      box-sizing: border-box;
       white-space: nowrap;
+      overflow: hidden;
       text-overflow: ellipsis;
     }
     .album:hover .info-overlay {
@@ -86,7 +90,7 @@
       text-align: center;
     }
     .socials {
-      margin-bottom: 1.5rem; /* increased spacing */
+      margin-bottom: 1.5rem; /* bigger spacing between socials and email */
     }
     .socials a {
       margin: 0 1rem;
@@ -115,27 +119,27 @@
     <!-- First row (3 albums) -->
     <div class="albums">
       <div class="album">
-        <img src="LL.png" alt="Lightning Storm/Livewire">
+        <img src="LL.png" alt="Lightning Storm/Livewire" />
         <div class="info-overlay">Lightning Storm/Livewire – 2024</div>
       </div>
       <div class="album">
-        <img src="6350a86c8283af6f6bfa3e998f4d047e.JPEG" alt="Live at the William Street Bird">
+        <img src="6350a86c8283af6f6bfa3e998f4d047e.JPEG" alt="Live at the William Street Bird" />
         <div class="info-overlay">Live at the William Street Bird – 2024</div>
       </div>
       <div class="album">
-        <img src="EP.jpg" alt="Glimmer EP">
+        <img src="EP.jpg" alt="Glimmer EP" />
         <div class="info-overlay">Glimmer EP – 2023</div>
       </div>
     </div>
 
-    <!-- Second row (2 left aligned albums) -->
+    <!-- Second row (2 albums aligned left) -->
     <div class="album-row">
       <div class="album">
-        <img src="GLIMMER ARTWORK final.jpg" alt="Heaven">
+        <img src="GLIMMER ARTWORK final.jpg" alt="Heaven" />
         <div class="info-overlay">Heaven – 2022</div>
       </div>
       <div class="album">
-        <img src="Screenshot 2025-05-22 at 12.24.35 pm.png" alt="My Body">
+        <img src="Screenshot 2025-05-22 at 12.24.35 pm.png" alt="My Body" />
         <div class="info-overlay">My Body – 2021</div>
       </div>
     </div>
@@ -148,10 +152,13 @@
         <a href="https://glimmerband.bandcamp.com/" target="_blank">Bandcamp</a>
         <a href="https://soundcloud.com/glimmer-857594896/sets/glimmer-live-at-william-st-bird" target="_blank">SoundCloud</a>
       </div>
-      <div class="email"><a href="mailto:contact.glimmerband@gmail.com">contact.glimmerband@gmail.com</a></div>
+      <div class="email">
+        <a href="mailto:contact.glimmerband@gmail.com">contact.glimmerband@gmail.com</a>
+      </div>
     </footer>
   </div>
 </body>
 </html>
+
 
 
