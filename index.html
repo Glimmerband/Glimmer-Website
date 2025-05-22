@@ -11,6 +11,7 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Galvji', sans-serif;
       background-color: #fdf5e6;
@@ -18,15 +19,18 @@
       padding: 4rem 2rem;
       text-align: center;
     }
+
     .container {
       max-width: 1000px;
       margin: 0 auto;
       text-align: left;
     }
+
     header {
       margin-bottom: 4rem;
       text-align: left;
     }
+
     header h1 {
       font-size: 3rem;
       font-weight: 700;
@@ -35,21 +39,25 @@
       margin-left: 0.5rem;
       font-family: 'Galvji', sans-serif;
     }
+
     .albums {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      gap: 2.5rem 2rem; /* vertical and horizontal gap */
       margin-bottom: 4rem;
+      justify-content: center;
     }
+
     .album {
       position: relative;
       width: 100%;
-      max-width: 200px; /* reduced album size */
+      max-width: 240px; /* increased album size */
       aspect-ratio: 1 / 1;
       border-radius: 4px;
       overflow: visible;
-      margin: 0 auto; /* center album in column */
+      margin: 0 auto;
     }
+
     .album img {
       width: 100%;
       height: 100%;
@@ -57,6 +65,7 @@
       border-radius: 4px;
       display: block;
     }
+
     .info-overlay {
       position: absolute;
       left: 0;
@@ -79,31 +88,38 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .album:hover .info-overlay {
       opacity: 1;
     }
+
     footer {
       font-size: 1rem;
       color: #555;
       margin-top: 4rem;
       text-align: center;
     }
+
     .socials {
-      margin-bottom: 2.5rem; /* increased gap between links and email */
+      margin-bottom: 2.5rem;
     }
+
     .socials a {
       margin: 0 1rem;
       color: #8B0000;
       text-decoration: none;
       font-weight: 500;
     }
+
     .socials a:hover {
       color: #600000;
     }
+
     .email a {
       color: #8B0000;
       text-decoration: none;
     }
+
     .email a:hover {
       text-decoration: underline;
     }
@@ -114,9 +130,11 @@
         grid-template-columns: 1fr;
         gap: 2.5rem;
       }
+
       header h1 {
         font-size: 2rem;
       }
+
       .album {
         max-width: 75%;
       }
@@ -139,34 +157,6 @@
         <div class="info-overlay">Live at the William Street Bird – 2024</div>
       </div>
       <div class="album">
-        <img src="EP.jpg" alt="Glimmer EP" />
-        <div class="info-overlay">Glimmer EP – 2023</div>
-      </div>
-      <div class="album">
-        <img src="GLIMMER ARTWORK final.jpg" alt="Heaven" />
-        <div class="info-overlay">Heaven – 2022</div>
-      </div>
-      <div class="album">
-        <img src="Screenshot 2025-05-22 at 12.24.35 pm.png" alt="My Body" />
-        <div class="info-overlay">My Body – 2021</div>
-      </div>
-    </div>
-
-    <footer>
-      <div class="socials">
-        <a href="https://open.spotify.com/artist/0mUWTPlspOFnxXlfaygG2x?si=L3VfPslMQyCUimcRBZ9J7w" target="_blank">Spotify</a>
-        <a href="https://www.instagram.com/glimmer.band/?hl=en" target="_blank">Instagram</a>
-        <a href="https://www.youtube.com/@glimmer_AU" target="_blank">YouTube</a>
-        <a href="https://glimmerband.bandcamp.com/" target="_blank">Bandcamp</a>
-        <a href="https://soundcloud.com/glimmer-857594896/sets/glimmer-live-at-william-st-bird" target="_blank">SoundCloud</a>
-      </div>
-      <div class="email">
-        <a href="mailto:contact.glimmerband@gmail.com">contact.glimmerband@gmail.com</a>
-      </div>
-    </footer>
-  </div>
-</body>
-</html>
 
 
 
