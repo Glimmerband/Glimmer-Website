@@ -39,9 +39,13 @@
       margin-bottom: 4rem;
       justify-content: start;
     }
-    /* Make the last row albums align left but keep grid spacing */
-    .album:nth-child(4),
+    /* Increase vertical gap between top and bottom rows */
+    .album:nth-child(4) {
+      margin-top: 3.5rem; /* bigger gap before 4th album */
+      justify-self: start;
+    }
     .album:nth-child(5) {
+      margin-top: 3.5rem; /* same for 5th album */
       justify-self: start;
     }
     .album {
@@ -79,7 +83,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      /* Removed box-shadow as requested */
     }
     .album:hover .info-overlay {
       opacity: 1;
@@ -155,6 +159,7 @@
   </div>
 </body>
 </html>
+
 
 
 
