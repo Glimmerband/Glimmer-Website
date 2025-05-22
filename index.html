@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,7 +16,7 @@
       font-family: 'Galvji', sans-serif;
       background-color: #fdf5e6;
       color: #111;
-      padding: 4rem 2rem;
+      padding: 4rem 2rem 2rem;
       text-align: center;
     }
 
@@ -26,9 +26,63 @@
       text-align: left;
     }
 
+    /* Menu styles */
+    .menu {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-family: 'Galvji', sans-serif;
+      z-index: 1000;
+    }
+
+    .menu-toggle {
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+    }
+
+    .menu-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .menu-links a {
+      text-decoration: none;
+      color: #8B0000;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .menu-links a:hover {
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .menu-links {
+        flex-direction: column;
+        background-color: #fdf5e6;
+        position: absolute;
+        top: 2.5rem;
+        left: 0;
+        padding: 1rem;
+        display: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .menu-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
     header {
       margin-bottom: 4rem;
       text-align: left;
+      margin-top: 3rem;
     }
 
     header h1 {
@@ -44,7 +98,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 3rem 3.5rem; /* increased horizontal spacing */
+      gap: 3rem 3.5rem;
       margin-bottom: 4rem;
     }
 
@@ -142,6 +196,16 @@
   </style>
 </head>
 <body>
+  <!-- Menu -->
+  <nav class="menu">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="mailto:contact.glimmerband@gmail.com">Contact</a>
+    </div>
+  </nav>
+
   <div class="container">
     <header>
       <h1>Glimmer</h1>
@@ -183,6 +247,13 @@
       </div>
     </footer>
   </div>
+
+  <script>
+    function toggleMenu() {
+      const links = document.querySelector('.menu-links');
+      links.classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
 
