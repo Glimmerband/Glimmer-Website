@@ -63,28 +63,28 @@
       border-radius: 4px;
     }
     .info-overlay {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -0.6rem; /* overlay hangs below bottom */
-      height: 3.5rem;
-      background: #fff;
-      color: #000;
-      padding: 0.4rem 1rem;
-      font-size: 0.85rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      /* Removed box-shadow as requested */
-    }
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.6rem; /* overlay hangs below bottom */
+  height: 3.5rem;
+  background: #fff;
+  color: #000;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem; /* smaller font size */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Removed box-shadow as requested */
+}
     .album:hover .info-overlay {
       opacity: 1;
     }
