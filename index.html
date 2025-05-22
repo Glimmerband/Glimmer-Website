@@ -41,21 +41,19 @@
     }
 
     .albums {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 3rem 2rem; /* large vertical and horizontal gap */
-      margin-bottom: 4rem;
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
+      gap: 3rem 2rem;
+      margin-bottom: 4rem;
     }
 
     .album {
       position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
+      width: 230px;
+      height: 230px;
       border-radius: 4px;
       overflow: visible;
-      max-width: 230px;
-      margin: 0 auto;
     }
 
     .album img {
@@ -126,16 +124,19 @@
 
     @media (max-width: 768px) {
       .albums {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .album {
+        width: 80%;
+        max-width: 250px;
+        height: auto;
+        aspect-ratio: 1 / 1;
       }
 
       header h1 {
         font-size: 2rem;
-      }
-
-      .album {
-        max-width: 80%;
       }
     }
   </style>
@@ -147,6 +148,7 @@
     </header>
 
     <div class="albums">
+      <!-- Top row (3 albums) -->
       <div class="album">
         <img src="LL.png" alt="Lightning Storm/Livewire" />
         <div class="info-overlay">Lightning Storm/Livewire – 2024</div>
@@ -159,6 +161,8 @@
         <img src="EP.jpg" alt="Glimmer EP" />
         <div class="info-overlay">Glimmer EP – 2023</div>
       </div>
+
+      <!-- Bottom row (2 albums centered) -->
       <div class="album">
         <img src="GLIMMER ARTWORK final.jpg" alt="Heaven" />
         <div class="info-overlay">Heaven – 2022</div>
@@ -184,6 +188,7 @@
   </div>
 </body>
 </html>
+
 
 
 
