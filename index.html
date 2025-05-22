@@ -37,54 +37,43 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
       margin-bottom: 4rem;
-      justify-content: start;
-    }
-    /* Increase vertical gap between top and bottom rows */
-    .album:nth-child(4) {
-      margin-top: 3.5rem; /* bigger gap before 4th album */
-      justify-self: start;
-    }
-    .album:nth-child(5) {
-      margin-top: 3.5rem; /* same for 5th album */
-      justify-self: start;
     }
     .album {
       position: relative;
-      width: 250px;
-      height: 250px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
       border-radius: 4px;
-      overflow: visible; /* allow overlay to hang outside */
+      overflow: visible;
     }
     .album img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
       border-radius: 4px;
+      display: block;
     }
     .info-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.6rem; /* overlay hangs below bottom */
-  height: 3.5rem;
-  background: #fff;
-  color: #000;
-  padding: 0.4rem 1rem;
-  font-size: 0.75rem; /* smaller font size */
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* Removed box-shadow as requested */
-}
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.6rem;
+      height: 3.5rem;
+      background: #fff;
+      color: #000;
+      padding: 0.4rem 1rem;
+      font-size: 0.7rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .album:hover .info-overlay {
       opacity: 1;
     }
@@ -112,6 +101,17 @@
     }
     .email a:hover {
       text-decoration: underline;
+    }
+
+    /* RESPONSIVE STYLING */
+    @media (max-width: 768px) {
+      .albums {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      header h1 {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
@@ -159,6 +159,7 @@
   </div>
 </body>
 </html>
+
 
 
 
