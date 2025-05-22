@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glimmer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fdf5e6;
+      color: #111;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    header {
+      margin-bottom: 4rem;
+    }
+    header h1 {
+      font-size: 4rem;
+      letter-spacing: 1px;
+    }
+    .albums {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .album {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .album img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: #ccc;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+    .album .date {
+      position: absolute;
+      bottom: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .album:hover .date {
+      opacity: 1;
+    }
+    .album-title {
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      color: #333;
+    }
+    footer {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 4rem;
+    }
+    .socials a {
+      margin: 0 1rem;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .socials a:hover {
+      color: #000;
+    }
+    .email {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Glimmer</h1>
+    </header>
+
+    <div class="albums">
+      <div class="album">
+        <img src="images/album1.jpg" alt="Lightning Storm/Livewire" />
+        <div class="date">2024</div>
+        <div class="album-title">Lightning Storm/Livewire</div>
+      </div>
+      <div class="album">
+        <img src="images/album2.jpg" alt="Live at the William Street Bird" />
+        <div class="date">2024</div>
+        <div class="album-title">Live at the William Street Bird</div>
+      </div>
+      <div class="album">
+        <img src="images/album3.jpg" alt="Glimmer EP" />
+        <div class="date">2023</div>
+        <div class="album-title">Glimmer EP</div>
+      </div>
+      <div class="album">
+        <img src="images/album4.jpg" alt="Heaven" />
+        <div class="date">2022</div>
+        <div class="album-title">Heaven</div>
+      </div>
+      <div class="album">
+        <img src="images/album5.jpg" alt="My Body" />
+        <div class="date">2021</div>
+        <div class="album-title">My Body</div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="socials">
+        <a href="https://open.spotify.com/artist/0mUWTPlspOFnxXlfaygG2x?si=L3VfPslMQyCUimcRBZ9J7w" target="_blank">Spotify</a>
+        <a href="https://www.instagram.com/glimmer.band/?hl=en" target="_blank">Instagram</a>
+        <a href="https://www.youtube.com/@glimmer_AU" target="_blank">YouTube</a>
+        <a href="https://glimmerband.bandcamp.com/" target="_blank">Bandcamp</a>
+        <a href="https://soundcloud.com/glimmer-857594896/sets/glimmer-live-at-william-st-bird" target="_blank">SoundCloud</a>
+      </div>
+      <div class="email"><a href="mailto:contact.glimmerband@gmail.com">contact.glimmerband@gmail.com</a></div>
+    </footer>
+  </div>
+</body>
+</html>
