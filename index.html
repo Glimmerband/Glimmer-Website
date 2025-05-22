@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Glimmer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Galvji:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Galvji:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -42,8 +42,8 @@
 
     .albums {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem 2rem; /* vertical and horizontal gap */
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem 2rem; /* large vertical and horizontal gap */
       margin-bottom: 4rem;
       justify-content: center;
     }
@@ -51,10 +51,10 @@
     .album {
       position: relative;
       width: 100%;
-      max-width: 240px; /* increased album size */
       aspect-ratio: 1 / 1;
       border-radius: 4px;
       overflow: visible;
+      max-width: 230px;
       margin: 0 auto;
     }
 
@@ -124,7 +124,6 @@
       text-decoration: underline;
     }
 
-    /* Responsive Styling */
     @media (max-width: 768px) {
       .albums {
         grid-template-columns: 1fr;
@@ -136,7 +135,7 @@
       }
 
       .album {
-        max-width: 75%;
+        max-width: 80%;
       }
     }
   </style>
@@ -157,7 +156,34 @@
         <div class="info-overlay">Live at the William Street Bird – 2024</div>
       </div>
       <div class="album">
+        <img src="EP.jpg" alt="Glimmer EP" />
+        <div class="info-overlay">Glimmer EP – 2023</div>
+      </div>
+      <div class="album">
+        <img src="GLIMMER ARTWORK final.jpg" alt="Heaven" />
+        <div class="info-overlay">Heaven – 2022</div>
+      </div>
+      <div class="album">
+        <img src="Screenshot 2025-05-22 at 12.24.35 pm.png" alt="My Body" />
+        <div class="info-overlay">My Body – 2021</div>
+      </div>
+    </div>
 
+    <footer>
+      <div class="socials">
+        <a href="https://open.spotify.com/artist/0mUWTPlspOFnxXlfaygG2x?si=L3VfPslMQyCUimcRBZ9J7w" target="_blank">Spotify</a>
+        <a href="https://www.instagram.com/glimmer.band/?hl=en" target="_blank">Instagram</a>
+        <a href="https://www.youtube.com/@glimmer_AU" target="_blank">YouTube</a>
+        <a href="https://glimmerband.bandcamp.com/" target="_blank">Bandcamp</a>
+        <a href="https://soundcloud.com/glimmer-857594896/sets/glimmer-live-at-william-st-bird" target="_blank">SoundCloud</a>
+      </div>
+      <div class="email">
+        <a href="mailto:contact.glimmerband@gmail.com">contact.glimmerband@gmail.com</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
 
 
 
