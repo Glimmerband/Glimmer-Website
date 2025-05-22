@@ -33,33 +33,109 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
-      justify-items: center;
       margin-bottom: 4rem;
+      justify-content: center;
+    }
+    .album-row {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
     }
     .album {
       position: relative;
-      width: 220px;
+      width: 250px;
     }
     .album img {
       width: 100%;
       aspect-ratio: 1 / 1;
-      background-color: #ccc;
       object-fit: cover;
-      transition: opacity 0.3s ease;
+      border-radius: 4px;
     }
-    .overlay {
+    .info-overlay {
       position: absolute;
       bottom: 0;
       width: 100%;
       background: rgba(0, 0, 0, 0.7);
       color: #fff;
-      padding: 0.4rem;
-      font-size: 0.85rem;
+      padding: 0.5rem;
+      font-size: 0.9rem;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    .album:hover .overlay {
+    .album:hover .info-overlay {
       opacity: 1;
     }
-    .bottom-row {
+    footer {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 4rem;
+    }
+    .socials {
+      margin-bottom: 1rem;
+    }
+    .socials a {
+      margin: 0 1rem;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .socials a:hover {
+      color: #000;
+    }
+    .email a {
+      color: #000;
+      text-decoration: none;
+    }
+    .email a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Glimmer</h1>
+    </header>
+
+    <!-- First row (3 albums) -->
+    <div class="albums">
+      <div class="album">
+        <img src="Screenshot 2024-01-13 at 12.34.13 pm.jpg" alt="Lightning Storm/Livewire">
+        <div class="info-overlay">Lightning Storm/Livewire – 2024</div>
+      </div>
+      <div class="album">
+        <img src="6350a86c8283af6f6bfa3e998f4d047e.JPEG" alt="Live at the William Street Bird">
+        <div class="info-overlay">Live at the William Street Bird – 2024</div>
+      </div>
+      <div class="album">
+        <img src="EP.jpg" alt="Glimmer EP">
+        <div class="info-overlay">Glimmer EP – 2023</div>
+      </div>
+    </div>
+
+    <!-- Second row (2 centered albums) -->
+    <div class="album-row">
+      <div class="album">
+        <img src="GLIMMER ARTWORK final.jpg" alt="Heaven">
+        <div class="info-overlay">Heaven – 2022</div>
+      </div>
+      <div class="album">
+        <img src="Screenshot 2025-05-22 at 12.24.35 pm.png" alt="My Body">
+        <div class="info-overlay">My Body – 2021</div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="socials">
+        <a href="https://open.spotify.com/artist/0mUWTPlspOFnxXlfaygG2x?si=L3VfPslMQyCUimcRBZ9J7w" target="_blank">Spotify</a>
+        <a href="https://www.instagram.com/glimmer.band/?hl=en" target="_blank">Instagram</a>
+        <a href="https://www.youtube.com/@glimmer_AU" target="_blank">YouTube</a>
+        <a href="https://glimmerband.bandcamp.com/" target="_blank">Bandcamp</a>
+        <a href="https://soundcloud.com/glimmer-857594896/sets/glimmer-live-at-william-st-bird" target="_blank">SoundCloud</a>
+      </div>
+      <div class="email"><a href="mailto:contact.glimmerband@gmail.com">contact.glimmerband@gmail.com</a></div>
+    </footer>
+  </div>
+</body>
+</html>
 
