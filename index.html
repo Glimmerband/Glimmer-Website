@@ -14,7 +14,7 @@
 
     body {
       font-family: 'Galvji', sans-serif;
-      background-color: #fdf5e6;
+      background-color: #C6D5E9;
       color: #111;
       padding: 4rem 2rem 2rem;
       text-align: center;
@@ -35,16 +35,9 @@
       z-index: 1000;
     }
 
-    .menu-toggle {
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: none;
-    }
-
     .menu-links {
       display: flex;
       gap: 1.5rem;
-      transition: max-height 0.3s ease-out;
     }
 
     .menu-links a {
@@ -57,28 +50,6 @@
 
     .menu-links a:hover {
       color: #000;
-    }
-
-    @media (max-width: 768px) {
-      .menu-links {
-        flex-direction: column;
-        background-color: #fdf5e6;
-        position: absolute;
-        top: 2.5rem;
-        left: 0;
-        padding: 1rem;
-        max-height: 0;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .menu-links.show {
-        max-height: 200px;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
     }
 
     header {
@@ -194,17 +165,20 @@
       header h1 {
         font-size: 2rem;
       }
+
+      .menu-links {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Menu -->
   <nav class="menu">
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <div class="menu-links" id="menuLinks">
+    <div class="menu-links">
       <a href="index.html">Home</a>
       <a href="media.html">Media</a>
-      <a href="mailto:contact.glimmerband@gmail.com">Contact</a>
     </div>
   </nav>
 
@@ -249,14 +223,9 @@
       </div>
     </footer>
   </div>
-
-  <script>
-    function toggleMenu() {
-      const links = document.getElementById('menuLinks');
-      links.classList.toggle('show');
-    }
-  </script>
 </body>
+</html>
+
 </html>
 
 
