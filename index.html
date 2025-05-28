@@ -30,7 +30,6 @@
       position: absolute;
       top: 1rem;
       left: 1rem;
-      font-family: 'Galvji', sans-serif;
       z-index: 1000;
     }
 
@@ -64,12 +63,11 @@
       font-weight: 700;
       text-transform: uppercase;
       color: #000;
-      font-family: 'Galvji', sans-serif;
     }
 
     #album-title-display {
       font-size: 1.25rem;
-      color: #FFF5DC;
+      color: #8B0000;
       font-family: 'Galvji', sans-serif;
       transition: opacity 0.2s ease;
     }
@@ -110,52 +108,32 @@
       transition: opacity 0.3s ease;
       width: 40px;
       height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .album:hover .play-button {
       opacity: 1;
     }
 
-    .play-button::before {
-      content: '';
-      display: block;
+    .play-icon {
       width: 0;
       height: 0;
-      margin: auto;
       border-style: solid;
       border-width: 10px 0 10px 18px;
-      border-color: transparent transparent transparent #fff;
+      border-color: transparent transparent transparent #8B0000;
     }
 
-    .play-button.paused::before {
-      content: '';
+    .pause-icon {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 14px;
-      height: 18px;
-      background: transparent;
-      position: relative;
+      gap: 4px;
     }
 
-    .play-button.paused::before {
-      content: '';
-      position: relative;
-      display: inline-block;
-      width: 14px;
+    .pause-icon div {
+      width: 5px;
       height: 18px;
-      background: transparent;
-    }
-
-    .play-button.paused::after {
-      content: '||';
-      color: #fff;
-      font-size: 18px;
-      position: absolute;
-      left: 13px;
-      top: 9px;
-      transform: translate(-50%, -50%);
-      font-family: sans-serif;
+      background-color: #8B0000;
     }
 
     footer {
@@ -214,7 +192,6 @@
   </style>
 </head>
 <body>
-  <!-- Menu -->
   <nav class="menu">
     <div class="menu-links">
       <a href="index.html">Home</a>
@@ -231,13 +208,17 @@
     <div class="albums">
       <div class="album" onmouseenter="showAlbumTitle('Lightning Storm/Livewire – 2024')" onmouseleave="hideAlbumTitle()">
         <img src="LL.png" alt="Lightning Storm/Livewire" />
-        <button class="play-button" onclick="togglePlay(this, 'audio1')"></button>
+        <button class="play-button" onclick="togglePlay(this, 'audio1', 0, 0.7)">
+          <div class="play-icon"></div>
+        </button>
         <audio id="audio1" src="lightning_snippet.mp3"></audio>
       </div>
 
       <div class="album" onmouseenter="showAlbumTitle('Live at the William Street Bird – 2024')" onmouseleave="hideAlbumTitle()">
         <img src="6350a86c8283af6f6bfa3e998f4d047e.JPEG" alt="Live at the William Street Bird" />
-        <button class="play-button" onclick="togglePlay(this, 'audio2')"></button>
+        <button class="play-button" onclick="togglePlay(this, 'audio2', 34, 1, 61)">
+          <div class="play-icon"></div>
+        </button>
         <audio id="audio2" src="BB.mp3"></audio>
       </div>
 
@@ -269,64 +250,77 @@
   </div>
 
   <script>
-    let isPlaying = false;
     let currentAudio = null;
     let fadeOutTimer = null;
     let fadeInterval = null;
 
-    function togglePlay(button, audioId) {
-      const audio = document.getElementById(audioId);
+    function showAlbumTitle(title) {
+      document.getElementById('album-title-display').textContent = title;
+    }
 
-      // Stop other audios
+    function hideAlbumTitle() {
+      document.getElementById('album-title-display').textContent = '';
+    }
+
+    function togglePlay(button, audioId, startTime = 0, volume = 1, fadeOutStart = null) {
+      const audio = document.getElementById(audioId);
+      const iconContainer = button.querySelector('div');
+
       if (currentAudio && currentAudio !== audio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
         currentAudio.volume = 1;
-        const buttons = document.querySelectorAll('.play-button');
-        buttons.forEach(btn => btn.classList.remove('paused'));
-        clearTimeout(fadeOutTimer);
-        clearInterval(fadeInterval);
+        resetAllButtons();
+        clearTimers();
       }
 
       if (audio.paused) {
-        audio.currentTime = audioId === "audio2" ? 34 : 0;
-        audio.volume = 1;
+        audio.currentTime = startTime;
+        audio.volume = volume;
         audio.play();
         currentAudio = audio;
-        button.classList.add('paused');
 
-        // Fade out after duration
-        if (audioId === "audio2") {
+        iconContainer.className = 'pause-icon';
+        iconContainer.innerHTML = '<div></div><div></div>';
+
+        if (fadeOutStart !== null) {
           fadeOutTimer = setTimeout(() => {
             fadeInterval = setInterval(() => {
               if (audio.volume > 0.05) {
                 audio.volume -= 0.05;
               } else {
-                clearInterval(fadeInterval);
                 audio.pause();
                 audio.currentTime = 0;
                 audio.volume = 1;
-                button.classList.remove('paused');
+                iconContainer.className = 'play-icon';
+                iconContainer.innerHTML = '';
+                currentAudio = null;
+                clearInterval(fadeInterval);
               }
             }, 100);
-          }, 27000); // 30s total (34s to 64s = 30s)
+          }, (fadeOutStart - startTime) * 1000);
         }
       } else {
         audio.pause();
         audio.currentTime = 0;
         audio.volume = 1;
-        button.classList.remove('paused');
-        clearTimeout(fadeOutTimer);
-        clearInterval(fadeInterval);
+        iconContainer.className = 'play-icon';
+        iconContainer.innerHTML = '';
+        currentAudio = null;
+        clearTimers();
       }
     }
 
-    function showAlbumTitle(title) {
-      document.getElementById("album-title-display").textContent = title;
+    function resetAllButtons() {
+      document.querySelectorAll('.play-button div').forEach(icon => {
+        icon.className = 'play-icon';
+        icon.innerHTML = '';
+      });
     }
 
-    function hideAlbumTitle() {
-      document.getElementById("album-title-display").textContent = "";
+    function clearTimers() {
+      clearTimeout(fadeOutTimer);
+      clearInterval(fadeInterval);
     }
   </script>
 </body>
