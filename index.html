@@ -26,7 +26,6 @@
       text-align: left;
     }
 
-    /* Menu styles */
     .menu {
       position: absolute;
       top: 1rem;
@@ -80,8 +79,7 @@
       width: 230px;
       height: 230px;
       border-radius: 4px;
-      overflow: visible;
-      cursor: pointer;
+      overflow: hidden;
     }
 
     .album img {
@@ -117,6 +115,25 @@
 
     .album:hover .info-overlay {
       opacity: 1;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .play-button:hover {
+      background: rgba(0, 0, 0, 0.85);
     }
 
     footer {
@@ -189,9 +206,10 @@
     </header>
 
     <div class="albums">
-      <div class="album" onclick="playSnippet()">
+      <div class="album">
         <img src="LL.png" alt="Lightning Storm/Livewire" />
         <div class="info-overlay">Lightning Storm/Livewire – 2024</div>
+        <button class="play-button" onclick="togglePlay(this)">Play</button>
         <audio id="audio1" src="lightning_snippet.mp3"></audio>
       </div>
 
@@ -231,34 +249,49 @@
   </div>
 
   <script>
-    function playSnippet() {
+    let isPlaying = false;
+    let fadeOutTimer = null;
+    let fadeInterval = null;
+
+    function togglePlay(button) {
       const audio = document.getElementById("audio1");
-      audio.volume = 1;
-      audio.currentTime = 0;
-      audio.play();
 
-      let fadeDuration = 3000; // fade out over 3 seconds
-      let playDuration = 15000; // total play time = 15 seconds
-      let fadeStep = 50;
-      let fadeStart = playDuration - fadeDuration;
+      if (!isPlaying) {
+        audio.currentTime = 0;
+        audio.volume = 1;
+        audio.play();
+        button.textContent = "Pause";
+        isPlaying = true;
 
-      setTimeout(() => {
-        let fadeOut = setInterval(() => {
-          if (audio.volume > 0.05) {
-            audio.volume -= 0.05;
-          } else {
-            clearInterval(fadeOut);
-            audio.pause();
-            audio.currentTime = 0;
-            audio.volume = 1;
-          }
-        }, fadeStep);
-      }, fadeStart);
+        // Start fade after 12s, stop after 15s total
+        fadeOutTimer = setTimeout(() => {
+          fadeInterval = setInterval(() => {
+            if (audio.volume > 0.05) {
+              audio.volume -= 0.05;
+            } else {
+              clearInterval(fadeInterval);
+              audio.pause();
+              audio.currentTime = 0;
+              audio.volume = 1;
+              button.textContent = "Play";
+              isPlaying = false;
+            }
+          }, 100);
+        }, 12000);
+      } else {
+        // Stop manually
+        clearTimeout(fadeOutTimer);
+        clearInterval(fadeInterval);
+        audio.pause();
+        audio.currentTime = 0;
+        audio.volume = 1;
+        button.textContent = "Play";
+        isPlaying = false;
+      }
     }
   </script>
 </body>
 </html>
-
 
 
 
