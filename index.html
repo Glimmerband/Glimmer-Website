@@ -122,18 +122,25 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
+      background: #fff;
+      color: #000;
       border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.75rem;
+      font-family: 'Galvji', sans-serif;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
       cursor: pointer;
-      transition: background 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .album:hover .play-button {
+      opacity: 1;
     }
 
     .play-button:hover {
-      background: rgba(0, 0, 0, 0.85);
+      background: #eee;
     }
 
     footer {
@@ -263,7 +270,6 @@
         button.textContent = "Pause";
         isPlaying = true;
 
-        // Start fade after 12s, stop after 15s total
         fadeOutTimer = setTimeout(() => {
           fadeInterval = setInterval(() => {
             if (audio.volume > 0.05) {
@@ -279,7 +285,6 @@
           }, 100);
         }, 12000);
       } else {
-        // Stop manually
         clearTimeout(fadeOutTimer);
         clearInterval(fadeInterval);
         audio.pause();
@@ -292,6 +297,7 @@
   </script>
 </body>
 </html>
+
 
 
 
