@@ -53,8 +53,10 @@
 
     header {
       margin-bottom: 4rem;
-      text-align: left;
       margin-top: 3rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
     }
 
     header h1 {
@@ -62,8 +64,14 @@
       font-weight: 700;
       text-transform: uppercase;
       color: #000;
-      margin-left: 0.5rem;
       font-family: 'Galvji', sans-serif;
+    }
+
+    #album-title-display {
+      font-size: 1.25rem;
+      color: #FFF5DC;
+      font-family: 'Galvji', sans-serif;
+      transition: opacity 0.2s ease;
     }
 
     .albums {
@@ -90,33 +98,6 @@
       display: block;
     }
 
-    .info-overlay {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -0.6rem;
-      height: 3.5rem;
-      background: #fff;
-      color: #000;
-      padding: 0.4rem 1rem;
-      font-size: 0.7rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .album:hover .info-overlay {
-      opacity: 1;
-    }
-
     .play-button {
       position: absolute;
       top: 50%;
@@ -127,22 +108,54 @@
       cursor: pointer;
       opacity: 0;
       transition: opacity 0.3s ease;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 40px;
+      height: 40px;
     }
 
     .album:hover .play-button {
       opacity: 1;
     }
 
-    .play-icon, .pause-icon {
-      fill: white;
-      width: 30px;
-      height: 30px;
-      pointer-events: none;
+    .play-button::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      margin: auto;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent #fff;
+    }
+
+    .play-button.paused::before {
+      content: '';
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 14px;
+      height: 18px;
+      background: transparent;
+      position: relative;
+    }
+
+    .play-button.paused::before {
+      content: '';
+      position: relative;
+      display: inline-block;
+      width: 14px;
+      height: 18px;
+      background: transparent;
+    }
+
+    .play-button.paused::after {
+      content: '||';
+      color: #fff;
+      font-size: 18px;
+      position: absolute;
+      left: 13px;
+      top: 9px;
+      transform: translate(-50%, -50%);
+      font-family: sans-serif;
     }
 
     footer {
@@ -201,6 +214,7 @@
   </style>
 </head>
 <body>
+  <!-- Menu -->
   <nav class="menu">
     <div class="menu-links">
       <a href="index.html">Home</a>
@@ -211,44 +225,32 @@
   <div class="container">
     <header>
       <h1>Glimmer</h1>
+      <div id="album-title-display"></div>
     </header>
 
     <div class="albums">
-      <div class="album">
+      <div class="album" onmouseenter="showAlbumTitle('Lightning Storm/Livewire – 2024')" onmouseleave="hideAlbumTitle()">
         <img src="LL.png" alt="Lightning Storm/Livewire" />
-        <div class="info-overlay">Lightning Storm/Livewire – 2024</div>
-        <button class="play-button" onclick="togglePlay(this, 'audio1')">
-          <svg class="play-icon" viewBox="0 0 100 100">
-            <polygon points="30,20 80,50 30,80" />
-          </svg>
-        </button>
+        <button class="play-button" onclick="togglePlay(this, 'audio1')"></button>
         <audio id="audio1" src="lightning_snippet.mp3"></audio>
       </div>
 
-      <div class="album">
+      <div class="album" onmouseenter="showAlbumTitle('Live at the William Street Bird – 2024')" onmouseleave="hideAlbumTitle()">
         <img src="6350a86c8283af6f6bfa3e998f4d047e.JPEG" alt="Live at the William Street Bird" />
-        <div class="info-overlay">Live at the William Street Bird – 2024</div>
-        <button class="play-button" onclick="togglePlay(this, 'audio2', 34, 64)">
-          <svg class="play-icon" viewBox="0 0 100 100">
-            <polygon points="30,20 80,50 30,80" />
-          </svg>
-        </button>
+        <button class="play-button" onclick="togglePlay(this, 'audio2')"></button>
         <audio id="audio2" src="BB.mp3"></audio>
       </div>
 
-      <div class="album">
+      <div class="album" onmouseenter="showAlbumTitle('Glimmer EP – 2023')" onmouseleave="hideAlbumTitle()">
         <img src="EP.jpg" alt="Glimmer EP" />
-        <div class="info-overlay">Glimmer EP – 2023</div>
       </div>
 
-      <div class="album">
+      <div class="album" onmouseenter="showAlbumTitle('Heaven – 2022')" onmouseleave="hideAlbumTitle()">
         <img src="GLIMMER ARTWORK final.jpg" alt="Heaven" />
-        <div class="info-overlay">Heaven – 2022</div>
       </div>
 
-      <div class="album">
+      <div class="album" onmouseenter="showAlbumTitle('My Body – 2021')" onmouseleave="hideAlbumTitle()">
         <img src="Screenshot 2025-05-22 at 12.24.35 pm.png" alt="My Body" />
-        <div class="info-overlay">My Body – 2021</div>
       </div>
     </div>
 
@@ -267,83 +269,68 @@
   </div>
 
   <script>
-    let currentlyPlaying = null;
+    let isPlaying = false;
+    let currentAudio = null;
     let fadeOutTimer = null;
     let fadeInterval = null;
 
-    function togglePlay(button, audioId, startTime = 0, endTime = null) {
+    function togglePlay(button, audioId) {
       const audio = document.getElementById(audioId);
 
-      if (currentlyPlaying && currentlyPlaying.audio !== audio) {
-        currentlyPlaying.audio.pause();
-        currentlyPlaying.audio.currentTime = 0;
-        resetButtonIcon(currentlyPlaying.button);
+      // Stop other audios
+      if (currentAudio && currentAudio !== audio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio.volume = 1;
+        const buttons = document.querySelectorAll('.play-button');
+        buttons.forEach(btn => btn.classList.remove('paused'));
         clearTimeout(fadeOutTimer);
         clearInterval(fadeInterval);
       }
 
-      const isPlaying = !audio.paused;
-
-      if (!isPlaying) {
-        audio.currentTime = startTime;
+      if (audio.paused) {
+        audio.currentTime = audioId === "audio2" ? 34 : 0;
         audio.volume = 1;
         audio.play();
-        setPauseIcon(button);
+        currentAudio = audio;
+        button.classList.add('paused');
 
-        currentlyPlaying = { button, audio };
-
-        const duration = (endTime !== null) ? endTime - startTime : audio.duration;
-        const fadeStart = (endTime !== null) ? endTime - 3 : audio.duration - 3;
-
-        fadeOutTimer = setTimeout(() => {
-          fadeInterval = setInterval(() => {
-            if (audio.volume > 0.05) {
-              audio.volume -= 0.05;
-            } else {
-              clearInterval(fadeInterval);
-              audio.pause();
-              audio.currentTime = 0;
-              resetButtonIcon(button);
-            }
-          }, 100);
-        }, (fadeStart - startTime) * 1000);
-
-        if (endTime !== null) {
-          audio.ontimeupdate = () => {
-            if (audio.currentTime >= endTime) {
-              audio.pause();
-              audio.currentTime = 0;
-              resetButtonIcon(button);
-            }
-          };
+        // Fade out after duration
+        if (audioId === "audio2") {
+          fadeOutTimer = setTimeout(() => {
+            fadeInterval = setInterval(() => {
+              if (audio.volume > 0.05) {
+                audio.volume -= 0.05;
+              } else {
+                clearInterval(fadeInterval);
+                audio.pause();
+                audio.currentTime = 0;
+                audio.volume = 1;
+                button.classList.remove('paused');
+              }
+            }, 100);
+          }, 27000); // 30s total (34s to 64s = 30s)
         }
       } else {
-        clearTimeout(fadeOutTimer);
-        clearInterval(fadeInterval);
         audio.pause();
         audio.currentTime = 0;
-        resetButtonIcon(button);
+        audio.volume = 1;
+        button.classList.remove('paused');
+        clearTimeout(fadeOutTimer);
+        clearInterval(fadeInterval);
       }
     }
 
-    function setPauseIcon(button) {
-      button.innerHTML = `
-        <svg class="pause-icon" viewBox="0 0 100 100">
-          <rect x="30" y="20" width="12" height="60"></rect>
-          <rect x="58" y="20" width="12" height="60"></rect>
-        </svg>`;
+    function showAlbumTitle(title) {
+      document.getElementById("album-title-display").textContent = title;
     }
 
-    function resetButtonIcon(button) {
-      button.innerHTML = `
-        <svg class="play-icon" viewBox="0 0 100 100">
-          <polygon points="30,20 80,50 30,80" />
-        </svg>`;
+    function hideAlbumTitle() {
+      document.getElementById("album-title-display").textContent = "";
     }
   </script>
 </body>
 </html>
-
 
 
 
